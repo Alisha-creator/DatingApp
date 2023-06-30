@@ -15,8 +15,12 @@ export class AuthGuard implements CanActivate {
   canActivate(): Observable<boolean> {
     return this.accountService.currentUser$.pipe(
       map(user => {
-        if (user) return true;
-        this.toastrService.error('You Shall not pass!');
+        if (user) {
+          return true;
+        } else {
+          this.toastrService.error('You Shall not pass!');
+          return false;
+        }
       })
     );
   }
